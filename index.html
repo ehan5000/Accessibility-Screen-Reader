@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Screen Reader Simulation</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Page chrome helpers (does NOT affect uploaded content in the iframe) -->
+  <style>
+    .toolbar kbd { padding: 0 .25rem; border: 1px solid #d1d5db; border-radius: .25rem; font-size: .8rem; }
+  </style>
+</head>
+
+<body class="bg-white text-gray-900 min-h-screen flex flex-col">
+  <main class="max-w-6xl mx-auto px-6 py-8 space-y-6 flex-1">
+    <!-- Title -->
+    <header class="space-y-1">
+      <h1 class="text-5xl font-extrabold text-indigo-700">Screen Reader Simulation</h1>
+      <p class="text-lg text-gray-600">By: Ehan Hassan</p>
+    </header>
+
+    <!-- Controls -->
+    <section class="toolbar space-y-4">
+      <!-- Upload -->
+      <div>
+        <label for="fileUpload" class="block text-sm font-medium text-gray-700 mb-1">Upload HTML File</label>
+        <input id="fileUpload" type="file"
+               class="w-full p-3 border-2 border-blue-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+      </div>
+
+      <!-- Transport + speed -->
+      <div class="flex flex-wrap items-center gap-3">
+        <button id="playBtn"   class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg focus:ring-2 focus:ring-blue-300">Play</button>
+        <button id="pauseBtn"  class="bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded-lg focus:ring-2 focus:ring-yellow-300">Pause</button>
+        <button id="resumeBtn" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg focus:ring-2 focus:ring-green-300">Resume</button>
+        <button id="stopBtn"   class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg focus:ring-2 focus:ring-red-300">Stop</button>
+
+        <div class="flex items-center gap-3 ml-2">
+          <label for="speedControl" class="text-sm font-medium">Playback Speed</label>
+          <input id="speedControl" type="range" min="0.5" max="2" step="0.1" value="1"
+                 class="w-64 rounded-lg bg-blue-200"/>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-500">
+        Shortcuts: <kbd>T</kbd> next abbreviation • <kbd>H</kbd> next heading • Click anywhere in the web content to start from there.
+      </p>
+    </section>
+
+    <!-- Web content -->
+    <section class="rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+      <iframe id="contentFrame"
+              title="Uploaded page preview"
+              class="w-full"
+              style="height: 70vh; background: #fff;"></iframe>
+    </section>
+
+    <!-- Transcript -->
+    <section>
+      <details class="rounded-xl border border-blue-300 bg-white shadow-sm" open>
+        <summary class="cursor-pointer list-none px-4 py-3 font-semibold text-indigo-600 select-none">
+          Transcript (what TTS is reading)
+        </summary>
+        <div id="screenReaderOutput" class="px-4 pb-4 max-h-40 overflow-auto text-gray-800">
+          <p class="text-gray-500">Upload a file and press Play to see live highlighting here.</p>
+        </div>
+      </details> 
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full border-t bg-white">
+    <div class="max-w-6xl mx-auto px-6 py-4 text-center text-sm text-gray-500">
+      © 2025 Ehan Hassan
+    </div>
+  </footer>
+
+  <script src="screenReader.js"></script>
+</body>
+</html>
